@@ -1,0 +1,22 @@
+{
+  "name": "inventory_management_app",
+  "version": "1.0.0",
+  "description": "Seller Side of an E-Comm. Application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ssuyash3000/Inventory-Management.git"
+  },
+  "author": "Suyash",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ssuyash3000/Inventory-Management/issues"
+  },
+  "homepage": "https://github.com/ssuyash3000/Inventory-Management#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
