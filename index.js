@@ -12,5 +12,5 @@ server.use(ejsLayouts);
 const productController = new ProductController();
 
 server.get("/", productController.getProducts);
-
-server.listen(3400);
+server.get("/new", productController.getAddForm);
+server.listen(3500, () => console.log("server started at port 3500"));
