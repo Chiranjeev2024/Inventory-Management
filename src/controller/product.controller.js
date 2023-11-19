@@ -1,8 +1,8 @@
 //import path from "path"; //core module
 import ProductModel from "../model/product.model.js";
+let productArray = ProductModel.get();
 export default class ProductController {
   getProducts(req, res) {
-    let productArray = ProductModel.get();
     //console.log(productArray);
     //In sendFile we need to pass the path of the file
     //We will generate file path using path module
@@ -20,5 +20,12 @@ export default class ProductController {
   }
   getAddForm(req, res) {
     res.render("add-product", {});
+  }
+  addNewProduct(req, res) {
+    //accessing the form data
+    console.log(req.body);
+    ProductModel.add(req.body);
+    //Moving back to the products page when the product is added
+    res.render("products", { products: productArray });
   }
 }
