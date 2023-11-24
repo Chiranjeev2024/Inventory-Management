@@ -1,6 +1,9 @@
 <!-- views/add product.ejs -->
 
 <h1 class="mt-5 mb-4">Add New Product</h1>
+<%if(errorMessage){%>
+<div class="alert alert-danger" role="alert"><%=errorMessage%></div>
+<%}%>
 
 <form action="/" method="post">
   <div class="mb-3">
@@ -9,7 +12,7 @@
   </div>
   <div class="mb-3">
     <label for="desc" class="form-lable">Product Description</label>
-    <textarea class="form-control" id="desc" name="desc" required /></textarea>
+    <textarea class="form-control" id="desc" name="desc" required></textarea>
   </div>
   <div class="mb-3">
     <label for="price" class="form-lable">Price</label>
