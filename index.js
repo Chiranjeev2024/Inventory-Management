@@ -1,5 +1,6 @@
 import express from "express";
 import ProductController from "./src/controller/product.controller.js";
+import { validateRequest } from "./src/middlewares/validation.middleware.js";
 import path from "path";
 import ejsLayouts from "express-ejs-layouts";
 
@@ -24,5 +25,5 @@ const productController = new ProductController();
 server.get("/", productController.getProducts);
 server.get("/new", productController.getAddForm);
 //Handling post request for adding new product
-server.post("/", productController.addNewProduct);
+server.post("/", validateRequest, productController.addNewProduct);
 server.listen(port, () => console.log(`server started at ${port} 3500`));
