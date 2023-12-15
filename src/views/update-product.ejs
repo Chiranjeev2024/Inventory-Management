@@ -1,0 +1,55 @@
+<!-- views/update product.ejs -->
+<h1 class="mt-5 mb-4">Update New Product</h1>
+<%if(errorMessage){%>
+<div class="alert alert-danger" role="alert"><%=errorMessage%></div>
+<%}%>
+<form action="/update-product/" method="post">
+  <input
+    type="hidden"
+    class="form-control"
+    id="id"
+    name="id"
+    value="<%=product.id%>"
+    required
+  />
+  <div class="mb-3">
+    <label for="name" class="form-lable">Product Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="name"
+      name="name"
+      value="<%=product.name%>"
+      required
+    />
+  </div>
+  <div class="mb-3">
+    <label for="desc" class="form-lable">Product Description</label>
+    <textarea class="form-control" id="descp" name="descp" required>
+<%=product.descp%>
+  </textarea
+    >
+  </div>
+  <div class="mb-3">
+    <label for="price" class="form-lable">Price</label>
+    <input
+      type="number"
+      class="form-control"
+      id="price"
+      name="price"
+      value="<%=product.price%>"
+      required
+    />
+  </div>
+  <div class="mb-3">
+    <label for="imageUrl" class="form-lable">Image URL</label>
+    <input
+      type="url"
+      class="form-control"
+      id="imageUrl"
+      value="<%=product.imageUrl%>"
+      name="imageUrl"
+    />
+  </div>
+  <button type="submit" class="btn btn-primary">Update Product</button>
+</form>

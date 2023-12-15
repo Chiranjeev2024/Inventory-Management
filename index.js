@@ -26,4 +26,10 @@ server.get("/", productController.getProducts);
 server.get("/new", productController.getAddForm);
 //Handling post request for adding new product
 server.post("/", validateRequest, productController.addNewProduct);
+//Handle request for getting the view to update the product
+server.get("/update-product/:id", productController.getUpdateProductView);
+//Handle request for updating the product
+server.post("/update-product/", productController.postUpdateProduct);
+
+server.use(express.static("src/views"));
 server.listen(port, () => console.log(`server started at ${port} 3500`));

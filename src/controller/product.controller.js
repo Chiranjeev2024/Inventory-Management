@@ -28,4 +28,28 @@ export default class ProductController {
     //Moving back to the products page when the product is added
     res.render("products", { products: productArray });
   }
+  getUpdateProductView(req, res, next) {
+    //1. If Product exists then return view
+    const { id } = req.params;
+    const productFound = ProductModel.getById(id);
+    //console.log(req.params);
+    if (productFound) {
+      res.render("update-product", {
+        product: productFound,
+        errorMessage: null,
+      });
+    }
+    //2. Else return errors.
+    else {
+      res.status(401).send("Product Not Found");
+    }
+  }
+  postUpdateProduct(req, res, next) {
+    //console.log(req.body);
+    ProductModel.update(req.body);
+
+    //Moving back to the products page when the product is added
+    res.render("products", { products: productArray });
+    //res.redirect("/");
+  }
 }
