@@ -26,7 +26,8 @@ export default class ProductController {
     console.log(req.body);
     ProductModel.add(req.body);
     //Moving back to the products page when the product is added
-    res.render("products", { products: productArray });
+    // res.render("products", { products: productArray });
+    res.redirect("/");
   }
   getUpdateProductView(req, res, next) {
     //1. If Product exists then return view
@@ -51,5 +52,16 @@ export default class ProductController {
     //Moving back to the products page when the product is added
     res.render("products", { products: productArray });
     //res.redirect("/");
+  }
+  deleteProduct(req, res, next) {
+    //Handling the case if product do not exists
+    const productFound = ProductModel.getById(req.params.id);
+    //console.log(req.params);
+    if (!productFound) {
+      res.status(401).send("Product Not Found");
+    }
+    ProductModel.delete(req.params.id);
+    //res.render("products", { products: productArray });
+    res.redirect("/");
   }
 }

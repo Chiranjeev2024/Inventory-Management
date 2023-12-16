@@ -30,6 +30,9 @@ server.post("/", validateRequest, productController.addNewProduct);
 server.get("/update-product/:id", productController.getUpdateProductView);
 //Handle request for updating the product
 server.post("/update-product/", productController.postUpdateProduct);
+//Handle reqeust for deleting the product
+server.post("/delete-product/:id", productController.deleteProduct);
 
 server.use(express.static("src/views"));
+server.use(express.static("public"));
 server.listen(port, () => console.log(`server started at ${port} 3500`));

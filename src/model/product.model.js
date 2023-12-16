@@ -23,6 +23,13 @@ export default class ProductModel {
     const index = products.findIndex((p) => p.id == productObj.id);
     products[index] = productObj;
   }
+  static delete(id) {
+    const index = products.findIndex((p) => p.id == id);
+    if (index === -1) {
+      return;
+    }
+    products.splice(index, 1);
+  }
   static getById(id) {
     const result = products.find((p) => p.id == id);
     //console.log(result + "I am called " + id);
