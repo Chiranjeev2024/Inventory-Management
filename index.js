@@ -4,9 +4,21 @@ import { validateRequest } from "./src/middlewares/validation.middleware.js";
 import path from "path";
 import ejsLayouts from "express-ejs-layouts";
 import UserController from "./src/controller/user.controller.js";
+import session from "express-session";
+import { auth } from "./src/middlewares/auth.middleware.js";
+
 const port = process.env.PORT || 3001;
 
 const server = express();
+
+server.use(
+  session({
+    secret: "SecretKey",
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false },
+  })
+);
 
 //parse form data
 server.use(express.urlencoded({ extended: true }));
@@ -19,22 +31,26 @@ server.set("views", pathOfviews);
 
 //setting layout
 server.use(ejsLayouts);
+
 const userController = new UserController();
 server.get("/register", userController.getRegister);
 server.get("/login", userController.getLogin);
+server.post("/register", userController.postRegister);
+server.post("/login", userController.postLogin);
+server.get("/logout", userController.logout);
 
 const productController = new ProductController();
 
-server.get("/", productController.getProducts);
-server.get("/new", productController.getAddForm);
+server.get("/", auth, productController.getProducts);
+server.get("/new", auth, productController.getAddForm);
 //Handling post request for adding new product
-server.post("/", validateRequest, productController.addNewProduct);
+server.post("/", auth, validateRequest, productController.addNewProduct);
 //Handle request for getting the view to update the product
-server.get("/update-product/:id", productController.getUpdateProductView);
+server.get("/update-product/:id", auth, productController.getUpdateProductView);
 //Handle request for updating the product
-server.post("/update-product/", productController.postUpdateProduct);
+server.post("/update-product/", auth, productController.postUpdateProduct);
 //Handle reqeust for deleting the product
-server.post("/delete-product/:id", productController.deleteProduct);
+server.post("/delete-product/:id", auth, productController.deleteProduct);
 
 server.use(express.static("src/views"));
 server.use(express.static("public"));

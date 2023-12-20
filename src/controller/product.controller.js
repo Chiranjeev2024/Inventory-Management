@@ -16,10 +16,16 @@ export default class ProductController {
     //   "products.html"
     // );
     // return res.sendFile(pathOfFile); //.sendFile () comes from express to the res obejct
-    return res.render("products.ejs", { products: productArray });
+    return res.render("products.ejs", {
+      products: productArray,
+      userEmail: req.session.userEmail,
+    });
   }
   getAddForm(req, res) {
-    res.render("add-product", { errorMessage: null });
+    res.render("add-product", {
+      errorMessage: null,
+      userEmail: req.session.userEmail,
+    });
   }
   addNewProduct(req, res) {
     //accessing the form data
@@ -38,6 +44,7 @@ export default class ProductController {
       res.render("update-product", {
         product: productFound,
         errorMessage: null,
+        userEmail: req.session.userEmail,
       });
     }
     //2. Else return errors.

@@ -6,4 +6,15 @@ export default class UserModel {
     this.email = email;
     this.password = password;
   }
+  static add(name, email, password) {
+    const newUser = new UserModel(users.length + 1, name, email, password);
+    users.push(newUser);
+  }
+  static isValid(email, password) {
+    const result = users.find(
+      (u) => u.email === email && u.password === password
+    );
+    //If user if found user object is returned, else undefined will be returned
+    return result;
+  }
 }
