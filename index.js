@@ -3,7 +3,7 @@ import ProductController from "./src/controller/product.controller.js";
 import { validateRequest } from "./src/middlewares/validation.middleware.js";
 import path from "path";
 import ejsLayouts from "express-ejs-layouts";
-
+import UserController from "./src/controller/user.controller.js";
 const port = process.env.PORT || 3001;
 
 const server = express();
@@ -19,6 +19,9 @@ server.set("views", pathOfviews);
 
 //setting layout
 server.use(ejsLayouts);
+const userController = new UserController();
+server.get("/register", userController.getRegister);
+server.get("/login", userController.getLogin);
 
 const productController = new ProductController();
 
