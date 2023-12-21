@@ -11,7 +11,14 @@ export const validateRequest = async (req, res, next) => {
     body("price")
       .isFloat({ gt: 0 })
       .withMessage("Price should be greater than 0"),
-    body("imageUrl").isURL().withMessage("Invalid URL"),
+    // body("imageUrl").isURL().withMessage("Invalid URL"),
+    body("imageUrl").custom((value, { req }) => {
+      if (!req.file) {
+        // if file is empty
+        throw new Error("Image is required");
+      }
+      return true;
+    }),
   ];
 
   //2. Running the rules

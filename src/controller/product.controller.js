@@ -29,10 +29,14 @@ export default class ProductController {
   }
   addNewProduct(req, res) {
     //accessing the form data
-    console.log(req.body);
-    ProductModel.add(req.body);
+    const imageUrl = "/images/" + req.file.filename;
+    console.log({ ...req.body, imageUrl });
+    ProductModel.add({ ...req.body, imageUrl });
     //Moving back to the products page when the product is added
-    // res.render("products", { products: productArray });
+    // res.render("products", {
+    //   products: products,
+    //   userEmail: req.session.userEmail,
+    // });
     res.redirect("/");
   }
   getUpdateProductView(req, res, next) {

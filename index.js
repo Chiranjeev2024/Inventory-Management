@@ -6,7 +6,8 @@ import ejsLayouts from "express-ejs-layouts";
 import UserController from "./src/controller/user.controller.js";
 import session from "express-session";
 import { auth } from "./src/middlewares/auth.middleware.js";
-
+import { uploadFile } from "./src/middlewares/file-upload.middleware.js";
+import { log } from "console";
 const port = process.env.PORT || 3001;
 
 const server = express();
@@ -32,6 +33,11 @@ server.set("views", pathOfviews);
 //setting layout
 server.use(ejsLayouts);
 
+server.use((req, res, next) => {
+  console.log(req.path);
+  next();
+});
+
 const userController = new UserController();
 server.get("/register", userController.getRegister);
 server.get("/login", userController.getLogin);
@@ -44,7 +50,13 @@ const productController = new ProductController();
 server.get("/", auth, productController.getProducts);
 server.get("/new", auth, productController.getAddForm);
 //Handling post request for adding new product
-server.post("/", auth, validateRequest, productController.addNewProduct);
+server.post(
+  "/",
+  auth,
+  uploadFile.single("imageUrl"),
+  validateRequest,
+  productController.addNewProduct
+);
 //Handle request for getting the view to update the product
 server.get("/update-product/:id", auth, productController.getUpdateProductView);
 //Handle request for updating the product
