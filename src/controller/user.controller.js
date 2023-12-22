@@ -17,7 +17,7 @@ export default class UserController {
     res.redirect("/login");
   }
   postLogin(req, res) {
-    console.log("postLogin called");
+    //console.log("postLogin called");
     const { email, password } = req.body;
     const user = UserModel.isValid(email, password);
     if (!user) {
