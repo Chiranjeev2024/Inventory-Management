@@ -1,6 +1,6 @@
 import { body, validationResult } from "express-validator";
 export const validateRequest = async (req, res, next) => {
-  console.log("validator called");
+ // console.log("validator called");
 
   //1. Steup rule for validation using express-validator
   const rules = [

@@ -30,7 +30,7 @@ export default class ProductController {
   addNewProduct(req, res) {
     //accessing the form data
     const imageUrl = "/images/" + req.file.filename;
-    console.log({ ...req.body, imageUrl });
+    // console.log({ ...req.body, imageUrl });
     ProductModel.add({ ...req.body, imageUrl });
     //Moving back to the products page when the product is added
     // res.render("products", {
