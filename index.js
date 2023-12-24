@@ -7,10 +7,15 @@ import UserController from "./src/controller/user.controller.js";
 import session from "express-session";
 import { auth } from "./src/middlewares/auth.middleware.js";
 import { uploadFile } from "./src/middlewares/file-upload.middleware.js";
+import cookieParser from "cookie-parser";
+import { setLastVisit } from "./src/middlewares/lastVisit.middleware.js";
 
 const port = process.env.PORT || 3001;
 
 const server = express();
+
+server.use(cookieParser());
+// server.use(setLastVisit);
 
 server.use(
   session({
@@ -47,7 +52,7 @@ server.get("/logout", userController.logout);
 
 const productController = new ProductController();
 
-server.get("/", auth, productController.getProducts);
+server.get("/", auth, setLastVisit, productController.getProducts);
 server.get("/new", auth, productController.getAddForm);
 //Handling post request for adding new product
 server.post(
