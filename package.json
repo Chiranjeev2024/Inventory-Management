@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ssuyash3000/Inventory-Management.git"
+    "url": "git+https://github.com/Chiranjeev2024/Inventory-Management.git"
   },
   "author": "Suyash",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ssuyash3000/Inventory-Management/issues"
+    "url": "https://github.com/Chiranjeev2024/Inventory-Management/issues"
   },
-  "homepage": "https://github.com/ssuyash3000/Inventory-Management#readme",
+  "homepage": "https://github.com/Chiranjeev2024/Inventory-Management#readme",
   "dependencies": {
     "bootstrap": "^5.3.2",
     "cookie-parser": "^1.4.6",
